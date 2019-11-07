@@ -1,0 +1,88 @@
+doctype html
+html(lang='ja')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css", integrity="sha384-+MsSfd29vjUzcyqYURxcmpWGtqoSHBy+QdEJNLEslXQftxojQv0k6BGDqUNp9GtA", crossorigin="anonymous")
+    script(defer, src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.js", integrity="sha384-5zUJgoXUAOXAoLeyJm2Ja3vbN3VCnoc2w0rG7dyC2jjGwD8PINuWoDHJ3gNdkOxj", crossorigin="anonymous")
+    link(rel='stylesheet', href='report.styl')
+
+    title 
+  body
+    section
+      h1 目的
+      
+    section
+      h1 原理
+    
+        p 時間間隔 `Delta t` で標本化された信号 `f_i = f(t_i) (i = 1, 2, 3, ... N)` の定積分は<span data-cref="#equ-num-int-a"></span>で近似できる。
+
+        span.latex#equ-num-int-a.
+          \begin{aligned}
+            `int_(t_1)^(t_N) f(t) dt` & = `int_(t_1)^(t_2) f(t) dt + int_(t_2)^(t_3) f(t) dt + ... + int_(t_(N-1))^(t_N) f(t) dt` \\
+            & `~~` `f_1 Delta t + f_2 Delta t + ... + f_(N-1) Delta t` \\
+            & = `Delta t sum_(i=1)^(N-1) f_i`
+          \end{aligned}
+        
+    section
+      h1 実験方法
+
+      ol.noindent.paren
+        li ほげほげ
+        
+      | 実験で使用する器具を
+      span(data-cref='#tbl-instruments')
+      | に示す。
+      
+      table#tbl-instruments.aligncenter
+        caption 実験で使用する器具
+        tbody
+          tr
+            th(style="width: 15rem") 名称
+            th メーカ
+            th 型番
+          
+    section
+      h1 実験結果
+
+      figure#fig-digi-dcac
+        img(type="image/svg+xml", src="assets/digi-dcac.svg", style="width:100%")
+        figcaption 入力結合方式による方形波の表示の違い
+      
+      p 
+        | さらに、1周期のうち電圧が正である時間を `t_p` 、負である時間を `t_n` とする。このとき、
+
+        span ``S_p = t_p(V + Delta V)``
+        span ``S_n = t_n|-V + Delta V| = t_n(V - Delta V)``
+
+      table#tbl-bn-sum.numbers
+        caption <span data-cref="#equ-bn-approx"></span>の総和部分の値と有効数字
+        tr 
+          th `n`
+          th 総和
+          th 有効数字の桁数
+        tr
+          td `1`
+          td `297.67`
+          td `5`
+
+      span#equ-fourier-coeff-a
+        | ``{ (a_1,=,2.0700 ["V"]), (a_2,=,0.57627 ["V"]), (a_3,=,0.1262 ["V"]), (a_4,=,0.59295 ["V"]), (a_5,=,0.04940 ["V"]) :}``
+      span#equ-fourier-coeff-b
+        | ``{ (b_0,=,-0.44944 ["V"]), (b_1,=,0.77393 ["V"]), (b_2,=,-0.66360 ["V"]), (b_3,=,0.2315 ["V"]), (b_4,=,-0.08210 ["V"]), (b_5,=,-0.2155 ["V"]) :}``
+
+    section.pagebreak.thoughts
+      h1 考察
+      
+      figure#fig-function-generator
+        img(type="image/svg+xml", src="assets/num-int.svg", style="height: 10rem")
+        figcaption キャプ〜
+
+      p <span data-cref="#fig-function-generator"></span>はなんとかかんとか。
+      
+      p しかし、$ R_O \gg R_F $ となる場合、`R_O` には電流がほとんど流れないため `V_(ab)` を ab 間の開放電圧と見なせば `V_(ab) = V` となり、...
+
+    section.citation
+      h1 参考資料
+      ul
+        li 「sei0o inoue」 http://o0i.es (2019年7月7日参照)

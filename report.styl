@@ -1,0 +1,226 @@
+@page
+  size A4
+  margin 3rem
+  counter-increment page
+
+  @bottom-center
+    margin -30px
+    height -30px
+    font-family 'Times New Roman', 'Noto Serif CJK JP'
+    content counter(page)
+
+@page thoughts
+  @bottom-center
+    content 7 !important
+
+body
+  counter-reset section subsection paragraph page tbl fig equation
+  font-family 'Noto Serif CJK JP'
+  font-size 13px
+  line-height 23px
+
+section
+  h1, h2, h3
+    font-weight normal
+
+  h1
+    counter-increment section 
+    counter-reset subsection
+    font-size 1.4rem
+    break-after avoid-page
+
+    &::before
+      content counter(section) ". "
+
+  h2
+    counter-increment subsection
+    counter-reset paragraph
+    font-size 1.2rem
+    break-after avoid-page
+  
+    &::before
+      content counter(section) "." counter(subsection) ". "
+  
+  h3
+    counter-increment paragraph
+    break-after avoid-page
+
+    &::before
+      content counter(section) "." counter(subsection) "." counter(paragraph) ". "
+
+table
+  border-collapse collapse
+  margin 2rem auto
+  break-inside avoid-page
+  counter-increment tbl
+  // width 100%
+
+  caption
+    // text-align left
+    width 30rem
+    margin 0 auto
+
+    *, .mjx-block
+      display inline !important
+
+    &::before
+      content "表 " counter(tbl) " "
+
+  td
+    border solid 1px black
+    padding 3px
+
+    &.number
+      text-align right !important
+      width 10rem
+
+  th
+    border solid 1px black
+    height 1rem
+    width 10rem
+    // display block // this causes 'Typeerror: Cannot read property 'ac' of undefined'
+
+  &.aligncenter td
+    text-align center
+
+  &.numbers
+    td
+      text-align right
+
+.pagebreak
+  page-break-before always
+
+.noindent
+  padding-left 1.2em
+
+ul, ol
+  margin 10px 0
+  
+  &.paren
+    counter-reset item 
+    list-style none
+
+    li
+      counter-increment item
+      text-indent -1.25rem
+
+      &::before
+        content "(" counter(item) ") "
+
+  &.roman li::before
+    content "(" counter(item, lower-roman) ") "
+
+  &.alpha li::before
+    content "(" counter(item, lower-alpha) ") "
+    
+li > ul
+  margin-left -1.25rem
+
+p
+  text-indent 1em
+  margin 0
+
+figure
+  counter-increment fig
+  break-inside avoid-page
+  text-align center
+
+  figcaption
+    text-align center
+
+    &::before
+      content "図 " counter(fig) " "
+
+[data-cref^="#tbl-"]::after
+  content "表 " target-counter(attr(data-cref url), tbl) " "
+
+[data-cref^="#fig-"]::after
+  content "図 " target-counter(attr(data-cref url), fig) " "
+
+[data-cref^="#equ-"]::after
+  content " (" target-counter(attr(data-cref url), equation) ") 式"
+
+[data-cref^="#ite-"]::after
+  content " (" target-counter(attr(data-cref url), item) ") "
+
+[data-cref^="#cit-"]::after
+  content "参考資料 [" target-counter(attr(data-cref url), item) "] "
+
+[data-cref^="#ssec-"]::after
+  content target-counter(attr(data-cref url), section) "." target-counter(attr(data-cref url), subsection) " 節"
+
+.katex-display
+  display block
+  margin 1rem auto
+  text-align center
+  counter-increment equation
+  position relative
+
+  &::after
+    position absolute
+    font-size 1rem
+    right 1rem
+    margin-top -0.8rem
+    top 50%
+    vertical-align middle
+    content "(" counter(equation) ")"
+
+// Let spans have counters instead of .katex-display if they have ids starting with "equ-"
+[id^="equ-"]
+  counter-increment equation
+  .katex-display
+    counter-increment none
+
+.noindex .katex-display
+  counter-increment none
+
+  &::after
+    content ''
+
+.twocol
+  display flex
+  margin 0 auto
+  text-align center
+
+  table
+    width 50%
+    caption, td, th
+      width auto
+    margin 1rem
+
+
+section.citation
+  h1
+    counter-increment none
+
+    &::before
+      content ''
+
+  ul
+    counter-reset item
+    list-style none
+
+    li
+      counter-increment item
+      text-indent -1.25rem
+      &::before
+        content "[" counter(item) "] "
+
+// report-specific properties
+[data-cref="#fig-graph-vp"]::after
+  content "図 4 "
+
+[data-cref="#fig-graph-vi"]::after
+  content "図 3 "
+
+.thoughts
+  page "thoughts"
+
+#fig-cell
+  counter-reset fig 4
+
+.katex
+  font-size 1.1em
+
+.vlist > span
+  top -0.563em !important

@@ -1,0 +1,22 @@
+= Report Boilerplate
+
+== Requirements
+
+yarn will do.
+
+. parcel
+. posthtml
+. posthtml-katex
+. vivliostyle
+
+== Usage
+
+. write reports
+. launch parcel
+. open the endpoint usign vivliostyle viewer
+
+== todo
+
+- PDF concatenation + auto page numbering
+- auto graph generation without Inkscape
+- introduce build system: rake or make?

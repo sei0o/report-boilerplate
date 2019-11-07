@@ -1,0 +1,1 @@
+rsvg-convert -f pdf -o pdf/exp-10.pdf graphs/exp-10.svg
