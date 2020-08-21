@@ -48,6 +48,13 @@ html(lang='ja')
       figure#fig-digi-dcac
         img(type="image/svg+xml", src="assets/digi-dcac.svg", style="width:100%")
         figcaption 入力結合方式による方形波の表示の違い
+
+      figure.list#lst-ip-s
+        figcaption PCでのipコマンドの実行結果（簡易環境）
+        pre.
+          &#x24; ip addr
+          ...
+          3: wlan0: &lt;BROADCAST,MULTICAST,DYNAMIC,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
       
       p 
         | さらに、1周期のうち電圧が正である時間を `t_p` 、負である時間を `t_n` とする。このとき、

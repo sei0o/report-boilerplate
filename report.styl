@@ -130,12 +130,29 @@ figure
 
     &::before
       content "図 " counter(fig) " "
+  
+  &.list
+    counter-increment lst
+
+    figcaption::before
+      content "リスト " counter(lst) " "
+  
+    pre
+      display block
+      break-inside auto
+      white-space pre-wrap
+      border solid 1px black
+      padding 3px
+
 
 [data-cref^="#tbl-"]::after
   content "表 " target-counter(attr(data-cref url), tbl) " "
 
 [data-cref^="#fig-"]::after
   content "図 " target-counter(attr(data-cref url), fig) " "
+
+[data-cref^="#lst-"]::after
+  content "リスト " target-counter(attr(data-cref url), lst) " "
 
 [data-cref^="#equ-"]::after
   content " (" target-counter(attr(data-cref url), equation) ") 式"
