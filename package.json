@@ -5,7 +5,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.4.5",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "stylus": "^0.54.5"
   },
   "dependencies": {
